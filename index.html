@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyProfile - 个人求职网站</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Trebuchet MS"', 'Helvetica', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#7a8288',
+                        secondary: '#64748b',
+                        link: '#224b8d',
+                        text: '#7a8288',
+                        bg: '#ffffff',
+                        card: '#ffffff'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: "Trebuchet MS", Helvetica, sans-serif;
+            background-color: #ffffff;
+            color: #7a8288;
+        }
+        
+        .nav-link {
+            position: relative;
+            cursor: pointer;
+            transition: color 0.2s ease-in-out;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #7a8288;
+            transition: width 0.2s ease-in-out;
+        }
+        
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #7a8288;
+        }
+        
+        a {
+            color: #224b8d;
+            text-decoration: underline;
+        }
+        
+        a:hover {
+            color: #1a3a6e;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #7a8288;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 z-50 bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Left: MyProfile -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="navigateTo('basic-info')">
+                    <span class="text-2xl font-bold text-gray-600">
+                        MyProfile
+                    </span>
+                </div>
+                
+                <!-- Right: Links -->
+                <div class="flex space-x-6 sm:space-x-8 items-center">
+                    <span class="nav-link active font-medium text-gray-600 text-sm sm:text-base" onclick="navigateTo('basic-info')">基本信息</span>
+                    <span class="nav-link font-medium text-gray-600 text-sm sm:text-base" onclick="navigateTo('work-experience')">工作经历</span>
+                    <span class="nav-link font-medium text-gray-600 text-sm sm:text-base" onclick="navigateTo('portfolio')">作品集</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        
+        <!-- 1. Basic Info Section -->
+        <section id="basic-info" class="fade-in block">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Left Column (Narrow) -->
+                <div class="lg:col-span-1 space-y-6">
+                    <!-- Profile Card -->
+                    <div class="bg-white rounded-lg border border-gray-200 p-6 text-center">
+                        <div class="w-32 h-32 mx-auto rounded-full bg-gray-100 flex items-center justify-center mb-4 overflow-hidden border border-gray-200">
+                            <i class="fas fa-user text-5xl text-gray-500"></i>
+                        </div>
+                        <h1 class="text-2xl font-bold text-gray-700">武杨</h1>
+                        
+                        <div class="mt-6 pt-6 border-t border-gray-200 space-y-3 text-left">
+                            <div class="flex items-center text-gray-600">
+                                <i class="fas fa-envelope w-6 text-center text-gray-500"></i>
+                                <span class="text-sm">2536049989@qq.com</span>
+                            </div>
+                            <div class="flex items-center text-gray-600">
+                                <i class="fas fa-phone w-6 text-center text-gray-500"></i>
+                                <span class="text-sm">15547253328</span>
+                            </div>
+                            <div class="flex items-center text-gray-600">
+                                <i class="fas fa-map-marker-alt w-6 text-center text-gray-500"></i>
+                                <span class="text-sm">上海</span>
+                            </div>
+                            <div class="flex items-center text-gray-600">
+                                <i class="fas fa-birthday-cake w-6 text-center text-gray-500"></i>
+                                <span class="text-sm">出生年月：2001.10</span>
+                            </div>
+                            <div class="flex items-center text-gray-600">
+                                <i class="fas fa-users w-6 text-center text-gray-500"></i>
+                                <span class="text-sm">民族：汉</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column (Wide) -->
+                <div class="lg:col-span-2 space-y-6">
+                    
+                    <!-- About Me -->
+                    <div class="bg-white rounded-lg border border-gray-200 p-8">
+                        <h2 class="text-xl font-bold text-gray-700 mb-4">👨‍💻 关于我</h2>
+                        <p class="text-gray-600 leading-relaxed">
+                            同济大学经济与管理学院工业工程与管理专业硕士研究生在读。
+                        </p>
+                        
+                        <!-- Action Buttons -->
+                        <div class="flex gap-4 mt-6">
+                            <button onclick="navigateTo('work-experience')" class="flex-1 bg-gray-700 text-white py-3 px-4 rounded hover:bg-gray-600 transition flex items-center justify-center gap-2">
+                                <i class="fas fa-briefcase"></i> 查看工作经历
+                            </button>
+                            <button onclick="navigateTo('portfolio')" class="flex-1 bg-white text-gray-700 border border-gray-300 py-3 px-4 rounded hover:bg-gray-50 transition flex items-center justify-center gap-2">
+                                <i class="fas fa-layer-group"></i> 浏览作品集
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Education -->
+                    <div class="bg-white rounded-lg border border-gray-200 p-8">
+                        <h2 class="text-xl font-bold text-gray-700 mb-4">📖 教育经历</h2>
+                        <div class="space-y-6">
+                            <!-- 同济大学 -->
+                            <div class="border-b border-gray-100 pb-4">
+                                <div class="flex justify-between items-start mb-1">
+                                    <h3 class="font-bold text-gray-700">同济大学</h3>
+                                    <span class="text-xs font-semibold px-2 py-1 bg-gray-100 text-gray-600 rounded">2025.09 - 2028.06</span>
+                                </div>
+                                <p class="text-gray-600 text-sm">工业工程与管理 / 硕士</p>
+                                <p class="text-gray-500 text-sm mt-2">GPA：3.8（前10%）| 2025-2026优秀团员</p>
+                            </div>
+                            <!-- 南京航空航天大学 -->
+                            <div class="pb-0">
+                                <div class="flex justify-between items-start mb-1">
+                                    <h3 class="font-bold text-gray-700">南京航空航天大学</h3>
+                                    <span class="text-xs font-semibold px-2 py-1 bg-gray-100 text-gray-600 rounded">2021.09 - 2025.06</span>
+                                </div>
+                                <p class="text-gray-600 text-sm">管理科学与工程 / 本科</p>
+                                <p class="text-gray-500 text-sm mt-2">GPA：3.6（前20%）| 2022-2023校级学业奖学金、优秀团员</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Language -->
+                    <div class="bg-white rounded-lg border border-gray-200 p-8">
+                        <h2 class="text-xl font-bold text-gray-700 mb-4">🌐 语言水平</h2>
+                        <p class="text-gray-600">CET-6：493分</p>
+                    </div>
+
+                    <!-- Research Projects -->
+                    <div class="bg-white rounded-lg border border-gray-200 p-8">
+                        <h2 class="text-xl font-bold text-gray-700 mb-4">🔬 科研项目</h2>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <span class="mr-2">🏛️</span>
+                                <div>
+                                    <p class="font-medium text-gray-700">上海市重大课题</p>
+                                    <p class="text-sm text-gray-500">价值对齐视角下具身智能技术创新及其治理对策研究</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2">🏆</span>
+                                <div>
+                                    <p class="font-medium text-gray-700">教指委国家特等奖</p>
+                                    <p class="text-sm text-gray-500">工业制造类企业安全管理绩效评价模型</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2">🎓</span>
+                                <div>
+                                    <p class="font-medium text-gray-700">毕业设计</p>
+                                    <p class="text-sm text-gray-500">亚轨道空天运输系统重复发射可靠性分析</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Work Experience Section -->
+        <section id="work-experience" class="hidden fade-in">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl font-bold text-gray-700 mb-8 text-center">💼 工作经历</h2>
+                
+                <div class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-300 before:to-transparent">
+                    
+                    <!-- Experience 1 -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-gray-500 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                            <i class="fas fa-robot text-white text-sm"></i>
+                        </div>
+                        <div class="w-[calc(100%-2rem)] md:w-[calc(50%-1.5rem)] bg-white p-6 rounded border border-gray-200">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex items-center gap-2">
+                                    <h3 class="font-bold text-lg text-gray-700">AI产品实习生</h3>
+                                    <span class="text-xs font-semibold px-2 py-1 bg-blue-100 text-blue-600 rounded">实习</span>
+                                </div>
+                                <span class="text-xs font-semibold px-2 py-1 bg-gray-100 text-gray-600 rounded">2025.05 - 2025.09</span>
+                            </div>
+                            <p class="text-gray-500 text-sm font-medium mb-3">上海巨箔科技有限公司</p>
+                            <ul class="list-disc list-inside text-gray-600 text-sm space-y-1">
+                                <li>针对企业文档敏感性痛点，主导基于Ollama架构的DeepSeek系列模型本地化部署，在确保数据离线合规的前提下，将API响应延迟优化了70%；</li>
+                                <li>负责从0-1搭建基于RAG架构的智能文档系统。通过优化PDF文本解析与向量数据库检索链路，解决了长文档信息遗忘问题，实现了复杂业务文档的分钟级知识入库；</li>
+                                <li>建立了一套标准化的AI评估框架，引入召回率、准确率及F1-score等指标对模型回复质量进行量化。通过对500+条真实业务样本的A/B测试，辅助研发团队完成了核心算法的迭代决策；</li>
+                                <li>利用Dify进行Agent编排实验，通过MCP协议尝试打通外部工具调用链路，沉淀了《复杂场景下AI Agent任务拆解与指令工程SOP》。</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Experience 2 -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-gray-300 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                            <i class="fas fa-lightbulb text-gray-600 text-sm"></i>
+                        </div>
+                        <div class="w-[calc(100%-2rem)] md:w-[calc(50%-1.5rem)] bg-white p-6 rounded border border-gray-200">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex items-center gap-2">
+                                    <h3 class="font-bold text-lg text-gray-700">产品实习生</h3>
+                                    <span class="text-xs font-semibold px-2 py-1 bg-blue-100 text-blue-600 rounded">实习</span>
+                                </div>
+                                <span class="text-xs font-semibold px-2 py-1 bg-gray-100 text-gray-600 rounded">2024.06 - 2024.09</span>
+                            </div>
+                            <p class="text-gray-500 text-sm font-medium mb-3">南京集约科技有限公司</p>
+                            <ul class="list-disc list-inside text-gray-600 text-sm space-y-1">
+                                <li>基于竞品服务矩阵分析与用户路径推演，发起「我的」页升级需求，将单向「反馈」入口重构为双向「客服」入口，新增小红书直达链路，打通“APP内服务→内容社区”转化路径；</li>
+                                <li>独立输出交互原型与PRD，定义跳转逻辑、场景化微文案规范及异常状态处理规则；拉齐UI/研发/运营完成评审，推动功能灰度发布与数据埋点上线；</li>
+                                <li>实验期内入口点击率提升30%，为小红书账号冷启动带来初始曝光；沉淀《跨端引流需求评估SOP》与《产品微文案设计清单》，被团队复用于后续3个模块迭代。</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Experience 3 -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-gray-300 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                            <i class="fas fa-cubes text-gray-600 text-sm"></i>
+                        </div>
+                        <div class="w-[calc(100%-2rem)] md:w-[calc(50%-1.5rem)] bg-white p-6 rounded border border-gray-200">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex items-center gap-2">
+                                    <h3 class="font-bold text-lg text-gray-700">数字孪生产品助理实习生</h3>
+                                    <span class="text-xs font-semibold px-2 py-1 bg-blue-100 text-blue-600 rounded">实习</span>
+                                </div>
+                                <span class="text-xs font-semibold px-2 py-1 bg-gray-100 text-gray-600 rounded">2023.07 - 2023.09</span>
+                            </div>
+                            <p class="text-gray-500 text-sm font-medium mb-3">南京优倍自动化有限公司</p>
+                            <ul class="list-disc list-inside text-gray-600 text-sm space-y-1">
+                                <li>聚焦智慧工厂场景，运用SWOT与波特五力模型对6款头部数字孪生平台进行全维度对标，涵盖多源数据融合（IoT/PLC）、高保真物理仿真及Web端渲染效率等20+项技术指标；</li>
+                                <li>识别出竞品在“中小型企业低成本部署”上的功能缺失，独立撰写1.5万字《行业技术演进趋势分析》，为平台V2.0版本的“轻量化配置模块”设计提供决策依据。</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Portfolio Section -->
+        <section id="portfolio" class="hidden fade-in">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl font-bold text-gray-700 mb-8 text-center">📦 作品集</h2>
+                
+                <!-- Search & Filter -->
+                <div class="bg-white p-6 rounded border border-gray-200 mb-8">
+                    <div class="flex flex-col md:flex-row gap-4 justify-between items-center">
+                        <!-- Search -->
+                        <div class="relative w-full md:w-1/3">
+                            <input type="text" id="search-input" placeholder="搜索项目..." 
+                                class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent transition"
+                                oninput="filterPortfolio()">
+                            <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                        </div>
+                        
+                        <!-- Tags -->
+                        <div class="flex flex-wrap gap-2 justify-center md:justify-end" id="tag-container">
+                            <button class="tag-btn px-4 py-1.5 rounded text-sm font-medium bg-gray-700 text-white transition" data-tag="all">全部</button>
+                            <button class="tag-btn px-4 py-1.5 rounded text-sm font-medium bg-gray-100 text-gray-600 hover:bg-gray-200 transition" data-tag="method">方法论沉淀</button>
+                            <button class="tag-btn px-4 py-1.5 rounded text-sm font-medium bg-gray-100 text-gray-600 hover:bg-gray-200 transition" data-tag="strategy">产品战略</button>
+                            <button class="tag-btn px-4 py-1.5 rounded text-sm font-medium bg-gray-100 text-gray-600 hover:bg-gray-200 transition" data-tag="ai">AI应用</button>
+                            <button class="tag-btn px-4 py-1.5 rounded text-sm font-medium bg-gray-100 text-gray-600 hover:bg-gray-200 transition" data-tag="design">产品设计</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolio-grid">
+                    <!-- Card 1 -->
+                    <div class="portfolio-card bg-white rounded overflow-hidden border border-gray-200 hover:shadow-lg transition duration-300 group" data-tags="method strategy">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="方法论沉淀.png" alt="竞品分析方法论" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition"></div>
+                            <!-- 作品数量徽章 -->
+                            <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full shadow-sm flex items-center gap-1">
+                                <i class="fas fa-layer-group text-gray-500 text-xs"></i>
+                                <span class="text-xs font-medium text-gray-600">2个作品</span>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex gap-2 mb-2">
+                                <span class="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded">方法论沉淀</span>
+                                <span class="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded">产品战略</span>
+                            </div>
+                            <h3 class="font-bold text-lg text-gray-700 mb-1">竞品分析方法论</h3>
+                            <p class="text-gray-500 text-sm line-clamp-2 mb-4">基于南京优倍自动化数字孪生项目实践，沉淀的一套适用于工业场景、涵盖 PEST-SWOT 及产品五要素的专业对标模版，助力从技术指标对标转化为业务增长决策。</p>
+                            <!-- 作品链接按钮 -->
+                            <div class="flex gap-2">
+                                <a href="作品集作品/竞品分析方法论/竞品分析1v1.html" target="_blank" class="flex-1 text-center text-sm py-2 px-3 bg-gray-100 text-gray-600 rounded hover:bg-gray-200 transition flex items-center justify-center gap-1">
+                                    <i class="fas fa-file-alt text-xs"></i>
+                                    竞品分析1v1
+                                </a>
+                                <a href="作品集作品/竞品分析方法论/竞品分析Nv1.html" target="_blank" class="flex-1 text-center text-sm py-2 px-3 bg-gray-100 text-gray-600 rounded hover:bg-gray-200 transition flex items-center justify-center gap-1">
+                                    <i class="fas fa-file-alt text-xs"></i>
+                                    竞品分析Nv1
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="portfolio-card bg-white rounded overflow-hidden border border-gray-200 hover:shadow-lg transition duration-300 group" data-tags="mobile design">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="https://image.qwenlm.ai/public_source/d7a34c25-c26a-4103-879f-2e2f5b5417f9/1226c67d9-3c1e-448c-a5b8-8857764617a7.png" alt="Mobile App" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition"></div>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex gap-2 mb-2">
+                                <span class="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded">移动端</span>
+                                <span class="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded">UI 设计</span>
+                            </div>
+                            <h3 class="font-bold text-lg text-gray-700 mb-1">社交生活类 App</h3>
+                            <p class="text-gray-500 text-sm line-clamp-2">一款专注于宠物社交的移动应用，包含动态分享、即时通讯等功能模块。</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="portfolio-card bg-white rounded overflow-hidden border border-gray-200 hover:shadow-lg transition duration-300 group" data-tags="3d web">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="https://image.qwenlm.ai/public_source/d7a34c25-c26a-4103-879f-2e2f5b5417f9/103859bd2-17af-4c0a-b942-fa14ee33a61f.png" alt="3D Art" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition"></div>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex gap-2 mb-2">
+                                <span class="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded">3D 可视化</span>
+                                <span class="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded">Web 开发</span>
+                            </div>
+                            <h3 class="font-bold text-lg text-gray-700 mb-1">WebGL 抽象艺术展</h3>
+                            <p class="text-gray-500 text-sm line-clamp-2">利用 Three.js 和 GLSL 着色器创作的交互式 3D 网页艺术作品。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- No Results Message -->
+                <div id="no-results" class="hidden text-center py-12">
+                    <i class="fas fa-search text-4xl text-gray-300 mb-4"></i>
+                    <p class="text-gray-500">未找到匹配的作品</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-gray-200 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-gray-500 text-sm">
+            <p>&copy; 2025 武杨. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation Logic
+        function navigateTo(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('main > section').forEach(sec => {
+                sec.classList.add('hidden');
+                sec.classList.remove('block');
+            });
+            
+            // Show target section
+            const target = document.getElementById(sectionId);
+            target.classList.remove('hidden');
+            target.classList.add('block');
+            
+            // Update Nav Active State
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                // Simple check based on text content or onclick attribute could be done, 
+                // but for simplicity in this demo, we rely on visual feedback
+            });
+            
+            // Highlight corresponding nav link
+            const navLinks = document.querySelectorAll('.nav-link');
+            if(sectionId === 'basic-info') navLinks[0].classList.add('active');
+            if(sectionId === 'work-experience') navLinks[1].classList.add('active');
+            if(sectionId === 'portfolio') navLinks[2].classList.add('active');
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Portfolio Filtering Logic
+        let currentTag = 'all';
+
+        function filterPortfolio() {
+            const searchInput = document.getElementById('search-input').value.toLowerCase();
+            const cards = document.querySelectorAll('.portfolio-card');
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const title = card.querySelector('h3').innerText.toLowerCase();
+                const desc = card.querySelector('p').innerText.toLowerCase();
+                const tags = card.getAttribute('data-tags');
+                
+                const matchesSearch = title.includes(searchInput) || desc.includes(searchInput);
+                const matchesTag = currentTag === 'all' || tags.includes(currentTag);
+
+                if (matchesSearch && matchesTag) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            // Toggle No Results Message
+            const noResults = document.getElementById('no-results');
+            if (visibleCount === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+
+        // Tag Button Logic
+        const tagBtns = document.querySelectorAll('.tag-btn');
+        tagBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update Active Style
+                tagBtns.forEach(b => {
+                    b.classList.remove('bg-gray-700', 'text-white');
+                    b.classList.add('bg-gray-100', 'text-gray-600');
+                });
+                btn.classList.remove('bg-gray-100', 'text-gray-600');
+                btn.classList.add('bg-gray-700', 'text-white');
+
+                // Set Filter
+                currentTag = btn.getAttribute('data-tag');
+                filterPortfolio();
+            });
+        });
+    </script>
+</body>
+</html>
+
